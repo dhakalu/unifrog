@@ -1,0 +1,26 @@
+{
+  "name": "@rcm-ui/example-react-remote",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ./node_modules/@rcm-ui/nooga/bin/index.js build",
+    "dev": "vite dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rcm-ui/nooga": "workspace:^1.0.0",
+    "vite": "^4.2.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

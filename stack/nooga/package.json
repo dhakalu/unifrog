@@ -1,0 +1,24 @@
+{
+  "name": "@rcm-ui/nooga",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@vitejs/plugin-react": "^3.1.0",
+    "pino": "^8.11.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0"
+  },
+  "devDependencies": {
+    "@originjs/vite-plugin-federation": "^1.2.1",
+    "pino-pretty": "^10.0.0"
+  }
+}
