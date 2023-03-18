@@ -20,6 +20,10 @@ switch (args[0]) {
     import("../scripts/build.js");
     break;
   }
+  case "publish": {
+    import("../scripts/publish.js");
+    break;
+  }
   default: {
     console.log(`Unknown script command: '${args[0]}'`);
     process.exit(1);

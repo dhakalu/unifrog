@@ -1,3 +1,6 @@
 node_modules
 dist
 build
+
+# Ignore local remotes
+api/module-registry/remotes

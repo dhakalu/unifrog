@@ -1,0 +1,28 @@
+{
+    "folders": [
+      {
+        "name": "root",
+        "path": "."
+      },
+      {
+        "name": "remotes/react",
+        "path": "remotes/react"
+      },
+      {
+        "name": "remotes/vanilla",
+        "path": "remotes/vanilla"
+      },
+      {
+        "name": "shell",
+        "path": "shell"
+      },
+      {
+        "name": "api/module-registry",
+        "path": "api/module-registry"
+      },
+      {
+        "name": "stack/nooga",
+        "path": "stack/nooga"
+      }
+    ]
+  }

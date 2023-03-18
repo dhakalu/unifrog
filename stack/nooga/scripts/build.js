@@ -1,23 +1,30 @@
 import path from "path";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { build } from "vite";
 import { cwd } from "node:process";
 import logger from "../logger.js";
 import federation from "@originjs/vite-plugin-federation";
 import react from "@vitejs/plugin-react";
 
-const __dirname = fileURLToPath(new URL(cwd(), import.meta.url));
+// const __dirname = fileURLToPath(import.meta.url);
+
+const currentDirectory =  cwd()
+logger.info("Building project at directory %s", currentDirectory);
+const scriptDirectory = fileURLToPath(import.meta.url);
+logger.info("Running build script %s", scriptDirectory);
+
+const __dirname = fileURLToPath(pathToFileURL(currentDirectory));
 
 let noogaConfigFileLocation;
 let packageJSONLocation;
 try {
-  noogaConfigFileLocation = path.resolve(__dirname, `./nooga.config.js`);
+  noogaConfigFileLocation = pathToFileURL(path.resolve(__dirname, `./nooga.config.js`));
 } catch {
   logger.info("Could not find the nooga config file, proceeding with defaults");
 }
 
 try {
-  packageJSONLocation = path.resolve(__dirname, "./package.json");
+  packageJSONLocation = pathToFileURL(path.resolve(__dirname, "./package.json"));
 } catch (err) {
   logger.error("Error occurred while reading package json. Error is ");
   logger.trace(err);
@@ -44,12 +51,13 @@ if (!entryPoint) {
   entryPoint = "index.ts";
 }
 
-logger.info("Entry point is %s", entryPoint);
-
 if (packageJSON?.dependencies?.react || packageJSON?.peerDependencies?.react) {
   logger.info("Detected react. adding react plugin");
   plugins.push(react());
 }
+
+
+const remoteName = (packageJSON.name.startsWith("@")) ? packageJSON.name.split("/")[1] : packageJSON.name;
 
 if (noogaConfig.isFederated) {
   const exposes = packageJSON.exports;
@@ -59,13 +67,15 @@ if (noogaConfig.isFederated) {
     );
     process.exit(1);
   }
+  const federationConfig = {
+    name: remoteName,
+    filename: "remoteEntry.js",
+    exposes,
+    shared: [...Object.keys(packageJSON.dependencies || {})],
+  }
+  logger.info("Applying federation configs %s", JSON.stringify(federationConfig, null, 2))
   plugins.push(
-    federation({
-      name: packageJSON.name.split("/")[1],
-      filename: "remoteEntry.js",
-      exposes,
-      shared: [Object.keys(packageJSON.dependencies || {})],
-    })
+    federation(federationConfig)
   );
 }
 const input = entryPoint ? path.resolve(__dirname, entryPoint) : undefined;
@@ -75,7 +85,8 @@ logger.info("Entry point is %s", input);
     root: path.resolve(__dirname),
     build: {
       rollupOptions: {
-        // input,
+        input,
+        manifest: true
       },
     },
     plugins: plugins,
