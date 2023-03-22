@@ -23,6 +23,10 @@
       {
         "name": "stack/nooga",
         "path": "stack/nooga"
+      },
+      {
+        "name": "stack/vite-plugin-mfes",
+        "path": "stack/vite-plugin-mfes"
       }
     ]
   }

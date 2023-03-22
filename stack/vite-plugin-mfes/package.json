@@ -1,0 +1,26 @@
+{
+  "name": "@unifrog/vite-plugin-mfes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --commit-path ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rollup/plugin-virtual": "^3.0.1",
+    "estree-walker": "^3.0.3",
+    "magic-string": "^0.30.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "rollup": "^3.19.1",
+    "vite": "^4.2.0"
+  }
+}

@@ -1,32 +1,42 @@
 import "./App.css";
-import { lazy, Suspense } from "react";
+import { ComponentType, lazy, Suspense } from "react";
 import {
-  remotesMap,
-  __federation_method_getRemote
+  __federation_method_getRemote,
+  __mfes_remotesMap
 } from  '__federation__'
 
 
-remotesMap['dynamic'] = {
-  url: "http://localhost:5003/assets/remoteEntry.js",
+__mfes_remotesMap['dynamic'] = {
+  url: "http://localhost:5000/static/remotes/react-example/latest/remoteEntry.js",
   format: 'esm',
   from: 'vite'
 }
-// console.log(federation)
 
-const RemoteButton = lazy(() => {
+console.log("map is", __mfes_remotesMap)
+
+
+
+function App() {
+  const RemoteButton = lazy(async () => {
   // __federation_method_setRemote('myRemote', {
   //   url: 'http://localhost:5000/static/remotes/react-example/latest/remoteEntry.js',
   //   format: 'esm'
   // })
-  return __federation_method_getRemote('myRemote', './Button')
-})
+  console.log("Trying to load remote")
+  try {
+    const module = await __federation_method_getRemote('dynamic', '.') as Promise<{ default: ComponentType<any>; }>;
+    return module;
+  } catch {
+    console.log("ERROR!!!!!")
+  }
+});
 
-function App() {
+
   return (
     
     <>
       <div className="App">Let me update this and see if it did it change?! there!</div>
-      <Suspense>
+      <Suspense fallback={"Could not load dynamic remote"}>
         <RemoteButton />
       </Suspense>
     </>

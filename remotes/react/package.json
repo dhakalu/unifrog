@@ -5,7 +5,7 @@
   "main": "index.ts",
   "type": "module",
   "exports": {
-    ".": "./src/index.tsx"
+    "./App": "./src/index.tsx"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

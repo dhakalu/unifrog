@@ -1,12 +1,12 @@
 import { defineConfig } from 'vite'
-import federation from '@originjs/vite-plugin-federation'
+import mfes from '@unifrog/vite-plugin-mfes'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    federation({
+    mfes({
       name: 'app',
       remotes: {
         dummyApp: 'dummy.js',

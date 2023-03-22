@@ -3,7 +3,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { build } from "vite";
 import { cwd } from "node:process";
 import logger from "../logger.js";
-import federation from "@originjs/vite-plugin-federation";
+import federation from "@unifrog/vite-plugin-mfes";
 import react from "@vitejs/plugin-react";
 
 // const __dirname = fileURLToPath(import.meta.url);
